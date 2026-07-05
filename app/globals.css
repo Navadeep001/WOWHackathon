@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Variables ─────────────────────────────────────────────────────────── */
+/* Light mode */
+:root {
+  --bg-primary:     #FFFFFF;
+  --bg-secondary:   #F5F7FF;
+  --bg-card:        #FFFFFF;
+  --border:         #DBEAFE;
+  --text-primary:   #0A1628;
+  --text-secondary: #374151;
+  --text-muted:     #6B7280;
+  --brand-royal:    #1B4FD8;
+  --brand-cyan:     #3B9EFF;
+  --brand-navy:     #0A1628;
+}
+
+/* Dark mode */
+.dark {
+  --bg-primary:     #0A1628;
+  --bg-secondary:   #0F1E3A;
+  --bg-card:        #132044;
+  --border:         #1E3A6E;
+  --text-primary:   #F0F6FF;
+  --text-secondary: #CBD5E1;
+  --text-muted:     #7B9EC8;
+  --brand-royal:    #3B9EFF;
+  --brand-cyan:     #60B4FF;
+  --brand-navy:     #0A1628;
+}
+
+/* ── Base styles ───────────────────────────────────────────────────────────── */
+body {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+* {
+  border-color: var(--border);
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--brand-royal);
+  border-radius: 999px;
+}
+
+/* ── Utility classes using CSS vars ────────────────────────────────────────── */
+/* These let every component use semantic tokens instead of hardcoded colors */
+@layer utilities {
+  .bg-page        { background-color: var(--bg-primary); }
+  .bg-page-alt    { background-color: var(--bg-secondary); }
+  .bg-card        { background-color: var(--bg-card); }
+  .border-brand   { border-color: var(--border); }
+  .text-primary   { color: var(--text-primary); }
+  .text-secondary { color: var(--text-secondary); }
+  .text-muted     { color: var(--text-muted); }
+  .text-brand     { color: var(--brand-royal); }
+  .text-accent    { color: var(--brand-cyan); }
+  .bg-brand       { background-color: var(--brand-royal); }
+  .bg-brand-hover { background-color: var(--brand-cyan); }
+}
