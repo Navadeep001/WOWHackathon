@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { AppNavbar } from '@/components/layout/app-navbar';
@@ -9,7 +9,17 @@ import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/lib/supabaseClient';
 import type { TeamMatch } from '@/types/team';
 
+// useSearchParams() requires a Suspense boundary during static prerendering,
+// otherwise Next.js throws "Error occurred prerendering page" at build time.
 export default function JoinTeamPage() {
+  return (
+    <Suspense fallback={null}>
+      <JoinTeamPageInner />
+    </Suspense>
+  );
+}
+
+function JoinTeamPageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { user, loading: authLoading } = useAuth();
